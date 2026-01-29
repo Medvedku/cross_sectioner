@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="38mm"
+   height="50mm"
+   viewBox="0 0 38 50"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="profile.svg"
+   inkscape:version="1.4.3 (fcd0343856, 2026-01-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:lc="https://librecad.org">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview8"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="3.1617708"
+     inkscape:cx="48.390604"
+     inkscape:cy="133.31137"
+     inkscape:window-width="2560"
+     inkscape:window-height="1403"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg8" />
+  <g
+     lc:layername="0"
+     lc:is_locked="false"
+     lc:is_construction="false"
+     fill="none"
+     stroke="black"
+     stroke-width="1"
+     id="g8"
+     style="vector-effect:non-scaling-stroke;-inkscape-stroke:hairline;stroke-width:0.26458333;stroke-dasharray:none;fill:#ff6600;fill-opacity:1;stroke:none">
+    <path
+       id="line8"
+       style="vector-effect:non-scaling-stroke;fill:#ff6600;fill-opacity:1;stroke:none"
+       d="M 38,47.751182 V 50 H 0 V 0 h 38 v 2.2488182 c 0,1.8247627 -1.401941,3.3433375 -3.220891,3.4888536 L 11.441784,7.6046571 C 7.8038814,7.895689 5,10.932839 5,14.582364 v 20.835272 c 0,3.649525 2.8038813,6.686675 6.441784,6.977708 l 23.337325,1.866984 C 36.59806,44.407844 38,45.926419 38,47.751182 Z"
+       sodipodi:nodetypes="ccccccccccccc" />
+  </g>
+</svg>
