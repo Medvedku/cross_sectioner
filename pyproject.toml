@@ -1,0 +1,11 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build-meta"
+
+[project]
+name = "cross_sectioner"
+version = "0.1.0"
+dependencies = [
+    "pandas",
+    "shapely",
+]

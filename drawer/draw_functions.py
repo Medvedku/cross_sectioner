@@ -1,3 +1,5 @@
+import os
+from shapely import affinity
 import numpy as np
 from shapely.geometry import Polygon
 from shapely.geometry import Point
@@ -5,7 +7,17 @@ from shapely.geometry import box
 import matplotlib.pyplot as plt
 
 
-def create_rhs_geometry(h, b, t, r_out, r_in, section_id="RHS"):
+def _get_res(subdivision):
+    if subdivision == 'calc':
+        return 32
+    if subdivision == 'draft':
+        return 5
+    if isinstance(subdivision, int):
+        return subdivision
+    return 32
+
+
+def create_rhs_geometry(h, b, t, r_out, r_in, subdivision='calc', section_id="RHS"):
     """
     Creates a Shapely geometry for a Rectangular Hollow Section.
     """
@@ -16,7 +28,7 @@ def create_rhs_geometry(h, b, t, r_out, r_in, section_id="RHS"):
 
         core = box(-(width/2 - radius), -(height/2 - radius),
                    (width/2 - radius), (height/2 - radius))
-        return core.buffer(radius, resolution=32)
+        return core.buffer(radius, resolution=_get_res(subdivision))
 
     # Construct shapes
     outer_poly = rounded_rect(b, h, r_out)
@@ -27,7 +39,7 @@ def create_rhs_geometry(h, b, t, r_out, r_in, section_id="RHS"):
     return rhs_section
 
 
-def create_chs_geometry(d, t, section_id="CHS"):
+def create_chs_geometry(d, t, subdivision=128, section_id="CHS"):
     """
     Creates a Shapely geometry for a Circular Hollow Section.
     """
@@ -35,28 +47,29 @@ def create_chs_geometry(d, t, section_id="CHS"):
     r_in = r_out - t
 
     # Create the hollow section
-    outer_circle = Point(0, 0).buffer(r_out, resolution=128)
-    inner_circle = Point(0, 0).buffer(r_in, resolution=128)
+    res = _get_res(subdivision)
+    outer_circle = Point(0, 0).buffer(r_out, resolution=res)
+    inner_circle = Point(0, 0).buffer(r_in, resolution=res)
 
     return outer_circle.difference(inner_circle)
 
 
-def create_shs_geometry(a, t, r_out, r_in, section_id="SHS"):
+def create_shs_geometry(a, t, r_out, r_in, subdivision='calc', section_id="SHS"):
     """
     Creates a Shapely geometry for a Square Hollow Section.
     Uses create_rhs_geometry logic where h = b = a.
     """
-    return create_rhs_geometry(h=a, b=a, t=t, r_out=r_out, r_in=r_in, section_id=section_id)
+    return create_rhs_geometry(h=a, b=a, t=t, r_out=r_out, r_in=r_in, subdivision=subdivision, section_id=section_id)
 
 
-def create_angle_geometry(h, b, t, r_root, r_toe, section_id="LU"):
+def create_angle_geometry(h, b, t, r_root, r_toe, subdivision='calc', section_id="LU"):
     """
     Creates an L-section where:
     - Heel (0,0) and Outer Tips are sharp.
     - Root (r_root) is concave.
     - Inner Toes (r_toe) are convex.
     """
-    res = 16  # Resolution for arcs
+    res = _get_res(subdivision)  # Resolution for arcs
 
     def get_arc(center, start_angle, end_angle, radius):
         angles = np.linspace(start_angle, end_angle, res)
@@ -100,13 +113,13 @@ def create_angle_geometry(h, b, t, r_root, r_toe, section_id="LU"):
     return Polygon(points)
 
 
-def create_i_section_geometry(h, b, tf, tw, r_root, section_id="I-Section"):
+def create_i_section_geometry(h, b, tf, tw, r_root, subdivision='calc', section_id="I-Section"):
     """
     Creates a standard I-beam or H-beam profile (Parallel Flanges).
     Covers IPE, HEA, HEB, HEM.
     Origin (0,0) is at the bottom-left corner of the bounding box.
     """
-    res = 16  # Resolution for each fillet arc
+    res = _get_res(subdivision)  # Resolution for each fillet arc
 
     def get_arc(center, start_angle, end_angle, radius):
         # Generates points for an arc between two angles
@@ -177,13 +190,13 @@ def create_i_section_geometry(h, b, tf, tw, r_root, section_id="I-Section"):
 
 
 
-def create_ipn_section_geometry(h, b, tf, tw, r_root, r_toe, section_id="IPN"):
+def create_ipn_section_geometry(h, b, tf, tw, r_root, r_toe, subdivision='calc', section_id="IPN"):
     """
     Creates a Tapered I-Beam (IPN/INP).
     Standard slope is 14% (approx 8 degrees).
     tf is the MEAN flange thickness (measured at b/4 from the edge, i.e., x=b/4 from centroid).
     """
-    res = 16
+    res = _get_res(subdivision)
     slope = 0.14
     angle = np.arctan(slope) # ~0.139 radians (8 degrees)
 
@@ -291,14 +304,14 @@ def create_ipn_section_geometry(h, b, tf, tw, r_root, r_toe, section_id="IPN"):
     return Polygon(shifted_points)
 
 
-def create_upn_section_geometry(h, b, tf, tw, r_root, r_toe, slope=None, section_id="UPN"):
+def create_upn_section_geometry(h, b, tf, tw, r_root, r_toe, slope=None, subdivision='calc', section_id="UPN"):
     """
     Creates a Tapered Channel (UPN/UE).
     If slope is None, uses height-based UPN logic (8% for h<=300, else 5%).
     If slope is provided (e.g., 0.08), uses that fixed value.
     tf is defined at the midpoint of the flange (x = b/2).
     """
-    res = 32
+    res = _get_res(subdivision)
 
     # 1. Determine Slope (Auto-detect or Manual)
     if slope is None:
@@ -355,14 +368,14 @@ def create_upn_section_geometry(h, b, tf, tw, r_root, r_toe, slope=None, section
     return Polygon(final_points)
 
 
-def create_ue_section_geometry(h, b, tf, tw, r_root, r_toe, section_id="UE"):
+def create_ue_section_geometry(h, b, tf, tw, r_root, r_toe, subdivision='calc', section_id="UE"):
     """
     Wrapper for UE channels using a fixed slope.
     """
-    return create_upn_section_geometry(h, b, tf, tw, r_root, r_toe, slope=0.05, section_id=section_id)
+    return create_upn_section_geometry(h, b, tf, tw, r_root, r_toe, slope=0.05, subdivision=subdivision, section_id=section_id)
 
 
-def create_t_section_geometry(h, b, tf, tw, r_root, r_toe, r_web, section_id="T-Section"):
+def create_t_section_geometry(h, b, tf, tw, r_root, r_toe, r_web, subdivision='calc', section_id="T-Section"):
     """
     Creates a Tapered T-Section (T-profile) with corrected root fillets.
     - Top surface is flat.
@@ -371,7 +384,7 @@ def create_t_section_geometry(h, b, tf, tw, r_root, r_toe, r_web, section_id="T-
     - tf measured at b/4.
     - tw measured at h/2.
     """
-    res = 16
+    res = _get_res(subdivision)
     slope = 0.02
     alpha_f = np.arctan(slope)
     alpha_w = np.arctan(slope)
@@ -450,12 +463,12 @@ def create_t_section_geometry(h, b, tf, tw, r_root, r_toe, r_web, section_id="T-
     return Polygon(final_points)
 
 
-def create_u_section_geometry(h, b, tf, tw, r_root, section_id="U-Section"):
+def create_u_section_geometry(h, b, tf, tw, r_root, subdivision='calc', section_id="U-Section"):
     """
     Creates a Parallel Flange Channel (UPE or UAP).
     Origin (0,0) is at the external heel (back of the web).
     """
-    res = 16  # Resolution for fillet arcs
+    res = _get_res(subdivision)  # Resolution for fillet arcs
 
     def get_arc(center, start_angle, end_angle, radius):
         angles = np.linspace(start_angle, end_angle, res)
@@ -501,3 +514,44 @@ def create_u_section_geometry(h, b, tf, tw, r_root, section_id="U-Section"):
     points.append((x_back, y_bottom))
 
     return Polygon(points)
+
+
+def save_geometry_to_svg(geom, filename, folder=".", invert_y=True, color="#66cb99"):
+    """
+    Saves a shapely geometry to an SVG file with mm units.
+    Requires an explicit filename. Creates the folder if it doesn't exist.
+    """
+    # 1. Handle Y-axis inversion (Engineering to SVG coords)
+    if invert_y:
+        # Flip across the horizontal axis of the geometry's center
+        geom = affinity.scale(geom, yfact=-1, origin='center')
+
+    # 2. Get Bounds and Dimensions
+    minx, miny, maxx, maxy = geom.bounds
+    width_val = maxx - minx
+    height_val = maxy - miny
+
+    # 3. Construct Path Data
+    path_data = geom.exterior.coords
+    path_str = "M " + " L ".join([f"{x},{y}" for x, y in path_data]) + " Z"
+
+    # 4. Handle Directory Management
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+        print(f"Created directory: {folder}")
+
+    # Combine folder and filename
+    full_path = os.path.join(folder, filename)
+
+    # 5. Build SVG content
+    svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" 
+    viewBox="{minx} {miny} {width_val} {height_val}" 
+    width="{width_val}mm" height="{height_val}mm">
+    <path d="{path_str}" fill="{color}" stroke="none" stroke-width="0" />
+</svg>"""
+
+    # 6. Save to file
+    with open(full_path, "w") as f:
+        f.write(svg_content)
+
+    print(f"Saved: {full_path} ({width_val:.2f}mm x {height_val:.2f}mm)")
