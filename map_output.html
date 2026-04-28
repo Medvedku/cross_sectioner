@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_07e24b6503bde43925c7171f7f0e8667 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_07e24b6503bde43925c7171f7f0e8667" ></div>
+        
+    
+<div style="
+    position: fixed; 
+    bottom: 50px; left: 50px; width: 120px; height: 110px; 
+    background-color: white; border:2px solid grey; z-index:9999; font-size:14px;
+    border-radius: 6px; padding: 10px;
+    ">
+    <b style="display: block; margin-bottom: 8px;">Vedenie</b>
+    <i class="fa fa-bolt" style="color:#37a7daff"></i>&nbsp; V406<br>
+    <i class="fa fa-bolt" style="color:#d23d29ff"></i>&nbsp; V425<br>
+    <i class="fa fa-bolt" style="color:#71ae26ff"></i>&nbsp; V479<br>
+</div>
+</body>
+<script>
+    
+    
+            var map_07e24b6503bde43925c7171f7f0e8667 = L.map(
+                "map_07e24b6503bde43925c7171f7f0e8667",
+                {
+                    center: [48.66, 19.33],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 8,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_11687473528735782df30ee57c3a1e30 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri Satellite",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_11687473528735782df30ee57c3a1e30.addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var tile_layer_6c0dad8c4b296a86d0d25f4e2dd50bb5 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri Labels",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_6c0dad8c4b296a86d0d25f4e2dd50bb5.addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var marker_841215ae3dd0e872efbdb3e6c0e7255d = L.marker(
+                [49.05801642348647, 19.44387212227458],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_80f9e370a3c95d2fb0bd0aae9192885f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5270703e360cc090455745df1b38d748 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_afb01bc5bdd21c7bb39529f045c7ff33 = $(`<div id="html_afb01bc5bdd21c7bb39529f045c7ff33" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Portál</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V406</td></tr>                 <tr><td><b>Číslo:</b></td><td>170</td></tr>                 <tr><td><b>Druh:</b></td><td>N</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Portál</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>3</td></tr>                 <tr><td><b>IoT 2:</b></td><td>2</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_A.png" alt="Portál" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Portál</p>             </div>         </div>         </div>`)[0];
+                popup_5270703e360cc090455745df1b38d748.setContent(html_afb01bc5bdd21c7bb39529f045c7ff33);
+            
+        
+
+        marker_841215ae3dd0e872efbdb3e6c0e7255d.bindPopup(popup_5270703e360cc090455745df1b38d748)
+        ;
+
+        
+    
+    
+            marker_841215ae3dd0e872efbdb3e6c0e7255d.bindTooltip(
+                `<div>
+                     Portál - 170
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_841215ae3dd0e872efbdb3e6c0e7255d.setIcon(icon_80f9e370a3c95d2fb0bd0aae9192885f);
+            
+    
+            var marker_53acf57a3dd008148cbfccda280f29c7 = L.marker(
+                [49.05904970952027, 19.447868773394067],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_769d1d34035a28aa26222ea1fb610b77 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e160a768e7451626baf9f349ad637787 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_33e1ba3772c444654708faa1503c69e8 = $(`<div id="html_33e1ba3772c444654708faa1503c69e8" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Kotevný V</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V406</td></tr>                 <tr><td><b>Číslo:</b></td><td>171</td></tr>                 <tr><td><b>Druh:</b></td><td>Nv</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Kotevný V</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>6</td></tr>                 <tr><td><b>IoT 2:</b></td><td>2</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_C.png" alt="Kotevný V" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Kotevný V</p>             </div>         </div>         </div>`)[0];
+                popup_e160a768e7451626baf9f349ad637787.setContent(html_33e1ba3772c444654708faa1503c69e8);
+            
+        
+
+        marker_53acf57a3dd008148cbfccda280f29c7.bindPopup(popup_e160a768e7451626baf9f349ad637787)
+        ;
+
+        
+    
+    
+            marker_53acf57a3dd008148cbfccda280f29c7.bindTooltip(
+                `<div>
+                     Kotevný V - 171
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_53acf57a3dd008148cbfccda280f29c7.setIcon(icon_769d1d34035a28aa26222ea1fb610b77);
+            
+    
+            var marker_a0b2d1fd1bddccbf9dc69f6f75f4f62e = L.marker(
+                [49.059904666192715, 19.451188082284798],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_3c0f0fab2cc5df3c095e5153da1edaa8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4d6a0426c6213210a27238fc176f3818 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dff356abe192ac7bd938c406b83138ba = $(`<div id="html_dff356abe192ac7bd938c406b83138ba" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Kotevný V</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V406</td></tr>                 <tr><td><b>Číslo:</b></td><td>172</td></tr>                 <tr><td><b>Druh:</b></td><td>Nv</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Kotevný V</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>3</td></tr>                 <tr><td><b>IoT 2:</b></td><td>2</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_C.png" alt="Kotevný V" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Kotevný V</p>             </div>         </div>         </div>`)[0];
+                popup_4d6a0426c6213210a27238fc176f3818.setContent(html_dff356abe192ac7bd938c406b83138ba);
+            
+        
+
+        marker_a0b2d1fd1bddccbf9dc69f6f75f4f62e.bindPopup(popup_4d6a0426c6213210a27238fc176f3818)
+        ;
+
+        
+    
+    
+            marker_a0b2d1fd1bddccbf9dc69f6f75f4f62e.bindTooltip(
+                `<div>
+                     Kotevný V - 172
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a0b2d1fd1bddccbf9dc69f6f75f4f62e.setIcon(icon_3c0f0fab2cc5df3c095e5153da1edaa8);
+            
+    
+            var marker_2431202f84a2da4ecec81ecdc8b54bc2 = L.marker(
+                [49.06086090989704, 19.454881168134172],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_2f45ce1ce952f25905fc155d2816f601 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_27a17073a54295c3fce9e525ae79c2a8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f4186ebfd219da65d1437bf50ab72e8e = $(`<div id="html_f4186ebfd219da65d1437bf50ab72e8e" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Portál</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V406</td></tr>                 <tr><td><b>Číslo:</b></td><td>173</td></tr>                 <tr><td><b>Druh:</b></td><td>RV(I)</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Portál</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>3</td></tr>                 <tr><td><b>IoT 2:</b></td><td>2</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_A.png" alt="Portál" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Portál</p>             </div>         </div>         </div>`)[0];
+                popup_27a17073a54295c3fce9e525ae79c2a8.setContent(html_f4186ebfd219da65d1437bf50ab72e8e);
+            
+        
+
+        marker_2431202f84a2da4ecec81ecdc8b54bc2.bindPopup(popup_27a17073a54295c3fce9e525ae79c2a8)
+        ;
+
+        
+    
+    
+            marker_2431202f84a2da4ecec81ecdc8b54bc2.bindTooltip(
+                `<div>
+                     Portál - 173
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2431202f84a2da4ecec81ecdc8b54bc2.setIcon(icon_2f45ce1ce952f25905fc155d2816f601);
+            
+    
+            var marker_28a47691f704419fa684034a63378fb1 = L.marker(
+                [49.06100616283318, 19.458441918235277],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_b5d826ca5e151c57f5f6be148ee71052 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f1f14dd9763c495f033fc4a99aef3351 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0e453eb8300d191d730c5bacd73f7abe = $(`<div id="html_0e453eb8300d191d730c5bacd73f7abe" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Portál</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V406</td></tr>                 <tr><td><b>Číslo:</b></td><td>174</td></tr>                 <tr><td><b>Druh:</b></td><td>Ns</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Portál</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>6</td></tr>                 <tr><td><b>IoT 2:</b></td><td>2</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_A.png" alt="Portál" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Portál</p>             </div>         </div>         </div>`)[0];
+                popup_f1f14dd9763c495f033fc4a99aef3351.setContent(html_0e453eb8300d191d730c5bacd73f7abe);
+            
+        
+
+        marker_28a47691f704419fa684034a63378fb1.bindPopup(popup_f1f14dd9763c495f033fc4a99aef3351)
+        ;
+
+        
+    
+    
+            marker_28a47691f704419fa684034a63378fb1.bindTooltip(
+                `<div>
+                     Portál - 174
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_28a47691f704419fa684034a63378fb1.setIcon(icon_b5d826ca5e151c57f5f6be148ee71052);
+            
+    
+            var marker_7b790d0d1cc5dd41ac12e4a393fd2f5b = L.marker(
+                [49.061186938701326, 19.462891786558746],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_3298befdaa91093f0203fedd2e4d7849 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c964a019e3650c7d51f13c7e56cb415f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b455e4e51c8af906bdd4f7039a559348 = $(`<div id="html_b455e4e51c8af906bdd4f7039a559348" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Kotevný V</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V406</td></tr>                 <tr><td><b>Číslo:</b></td><td>175</td></tr>                 <tr><td><b>Druh:</b></td><td>Nv</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Kotevný V</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>3</td></tr>                 <tr><td><b>IoT 2:</b></td><td>2</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_C.png" alt="Kotevný V" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Kotevný V</p>             </div>         </div>         </div>`)[0];
+                popup_c964a019e3650c7d51f13c7e56cb415f.setContent(html_b455e4e51c8af906bdd4f7039a559348);
+            
+        
+
+        marker_7b790d0d1cc5dd41ac12e4a393fd2f5b.bindPopup(popup_c964a019e3650c7d51f13c7e56cb415f)
+        ;
+
+        
+    
+    
+            marker_7b790d0d1cc5dd41ac12e4a393fd2f5b.bindTooltip(
+                `<div>
+                     Kotevný V - 175
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7b790d0d1cc5dd41ac12e4a393fd2f5b.setIcon(icon_3298befdaa91093f0203fedd2e4d7849);
+            
+    
+            var marker_ac4d57978c90eab7eec7b26a149d1a45 = L.marker(
+                [49.061300236861484, 19.465706553958498],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_4f82b9b57a03f9911f81e4432015b7af = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_42b3bdef8c9413f79c3f30ec30ed090c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_61d7d78a131a0eefdaa464d7fec52e5c = $(`<div id="html_61d7d78a131a0eefdaa464d7fec52e5c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Kotevný V</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V406</td></tr>                 <tr><td><b>Číslo:</b></td><td>176</td></tr>                 <tr><td><b>Druh:</b></td><td>Nv</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Kotevný V</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>3</td></tr>                 <tr><td><b>IoT 2:</b></td><td>2</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_C.png" alt="Kotevný V" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Kotevný V</p>             </div>         </div>         </div>`)[0];
+                popup_42b3bdef8c9413f79c3f30ec30ed090c.setContent(html_61d7d78a131a0eefdaa464d7fec52e5c);
+            
+        
+
+        marker_ac4d57978c90eab7eec7b26a149d1a45.bindPopup(popup_42b3bdef8c9413f79c3f30ec30ed090c)
+        ;
+
+        
+    
+    
+            marker_ac4d57978c90eab7eec7b26a149d1a45.bindTooltip(
+                `<div>
+                     Kotevný V - 176
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ac4d57978c90eab7eec7b26a149d1a45.setIcon(icon_4f82b9b57a03f9911f81e4432015b7af);
+            
+    
+            var marker_2dd4deea6817e94e992c1b7c75286285 = L.marker(
+                [48.19633554610237, 18.151908892264718],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_b0fb7c4bdcf6eca67ba72e99ccc08ad7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_adc56f52cc3cc684916d27ff341b80a9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e43dcfd712cf1315f8c54fd53fdd284c = $(`<div id="html_e43dcfd712cf1315f8c54fd53fdd284c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Portál</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V425</td></tr>                 <tr><td><b>Číslo:</b></td><td>110</td></tr>                 <tr><td><b>Druh:</b></td><td>N+8</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Portál</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>6</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_A.png" alt="Portál" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Portál</p>             </div>         </div>         </div>`)[0];
+                popup_adc56f52cc3cc684916d27ff341b80a9.setContent(html_e43dcfd712cf1315f8c54fd53fdd284c);
+            
+        
+
+        marker_2dd4deea6817e94e992c1b7c75286285.bindPopup(popup_adc56f52cc3cc684916d27ff341b80a9)
+        ;
+
+        
+    
+    
+            marker_2dd4deea6817e94e992c1b7c75286285.bindTooltip(
+                `<div>
+                     Portál - 110
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2dd4deea6817e94e992c1b7c75286285.setIcon(icon_b0fb7c4bdcf6eca67ba72e99ccc08ad7);
+            
+    
+            var marker_5a89cff092fb4ec3021b24b14a9436ad = L.marker(
+                [48.19754901889928, 18.157018525589052],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_5121ad357689bc8611309ef5c13c83b9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_6064562f60d2ecb699ebb2da3ac71900 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_64f4c130ec8e7965e259aaae79a2d88a = $(`<div id="html_64f4c130ec8e7965e259aaae79a2d88a" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Portál</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V425</td></tr>                 <tr><td><b>Číslo:</b></td><td>111</td></tr>                 <tr><td><b>Druh:</b></td><td>N+4</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Portál</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>6</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_A.png" alt="Portál" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Portál</p>             </div>         </div>         </div>`)[0];
+                popup_6064562f60d2ecb699ebb2da3ac71900.setContent(html_64f4c130ec8e7965e259aaae79a2d88a);
+            
+        
+
+        marker_5a89cff092fb4ec3021b24b14a9436ad.bindPopup(popup_6064562f60d2ecb699ebb2da3ac71900)
+        ;
+
+        
+    
+    
+            marker_5a89cff092fb4ec3021b24b14a9436ad.bindTooltip(
+                `<div>
+                     Portál - 111
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5a89cff092fb4ec3021b24b14a9436ad.setIcon(icon_5121ad357689bc8611309ef5c13c83b9);
+            
+    
+            var marker_6ccf296641a4068ad4e5b8787845181a = L.marker(
+                [48.198735251793316, 18.1620137775784],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_7b28dc7003b6002cace8b5310e763b2d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c14c74370bb0c93b062372e1c5cf35a4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6a763ec22c2a3b4e9e385e862957aa8c = $(`<div id="html_6a763ec22c2a3b4e9e385e862957aa8c" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Portál</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V425</td></tr>                 <tr><td><b>Číslo:</b></td><td>112</td></tr>                 <tr><td><b>Druh:</b></td><td>N+8</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Portál</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>6</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_A.png" alt="Portál" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Portál</p>             </div>         </div>         </div>`)[0];
+                popup_c14c74370bb0c93b062372e1c5cf35a4.setContent(html_6a763ec22c2a3b4e9e385e862957aa8c);
+            
+        
+
+        marker_6ccf296641a4068ad4e5b8787845181a.bindPopup(popup_c14c74370bb0c93b062372e1c5cf35a4)
+        ;
+
+        
+    
+    
+            marker_6ccf296641a4068ad4e5b8787845181a.bindTooltip(
+                `<div>
+                     Portál - 112
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6ccf296641a4068ad4e5b8787845181a.setIcon(icon_7b28dc7003b6002cace8b5310e763b2d);
+            
+    
+            var marker_1251134a8800d656a6c4c5831428ef87 = L.marker(
+                [48.20004067946936, 18.167512889808],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_a9571f2c01cc896940c3e6904669bc55 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ffe6c612eca3160c190d3ef7c116f712 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4b31febe0298d729c24f2aa253252ca0 = $(`<div id="html_4b31febe0298d729c24f2aa253252ca0" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Portál</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V425</td></tr>                 <tr><td><b>Číslo:</b></td><td>113</td></tr>                 <tr><td><b>Druh:</b></td><td>N+8</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Portál</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>6</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_A.png" alt="Portál" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Portál</p>             </div>         </div>         </div>`)[0];
+                popup_ffe6c612eca3160c190d3ef7c116f712.setContent(html_4b31febe0298d729c24f2aa253252ca0);
+            
+        
+
+        marker_1251134a8800d656a6c4c5831428ef87.bindPopup(popup_ffe6c612eca3160c190d3ef7c116f712)
+        ;
+
+        
+    
+    
+            marker_1251134a8800d656a6c4c5831428ef87.bindTooltip(
+                `<div>
+                     Portál - 113
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1251134a8800d656a6c4c5831428ef87.setIcon(icon_a9571f2c01cc896940c3e6904669bc55);
+            
+    
+            var marker_06cfbbd3bf21dcb64292536ac213fe67 = L.marker(
+                [48.201255316163504, 18.172627348127037],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_439616a53359c46a56fab17f1180b2ee = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5db60875adac66f5f1d865f2ed1e1f72 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b1e90e3b2eb870773f1e718bb1d01878 = $(`<div id="html_b1e90e3b2eb870773f1e718bb1d01878" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Portál</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V425</td></tr>                 <tr><td><b>Číslo:</b></td><td>114</td></tr>                 <tr><td><b>Druh:</b></td><td>N+8</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Portál</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-jednoduchý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>11</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_A.png" alt="Portál" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Portál</p>             </div>         </div>         </div>`)[0];
+                popup_5db60875adac66f5f1d865f2ed1e1f72.setContent(html_b1e90e3b2eb870773f1e718bb1d01878);
+            
+        
+
+        marker_06cfbbd3bf21dcb64292536ac213fe67.bindPopup(popup_5db60875adac66f5f1d865f2ed1e1f72)
+        ;
+
+        
+    
+    
+            marker_06cfbbd3bf21dcb64292536ac213fe67.bindTooltip(
+                `<div>
+                     Portál - 114
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_06cfbbd3bf21dcb64292536ac213fe67.setIcon(icon_439616a53359c46a56fab17f1180b2ee);
+            
+    
+            var marker_914c7390ccc8f6512b6c10c163cf9b53 = L.marker(
+                [47.905874193438386, 17.790647070124418],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_2f31b7862af80be90b0473950362ad01 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9189151abb1711f27d992c99a5ebfe12 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_293b27b1dae594c0c046b893512a6f2b = $(`<div id="html_293b27b1dae594c0c046b893512a6f2b" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Donau</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V479</td></tr>                 <tr><td><b>Číslo:</b></td><td>65</td></tr>                 <tr><td><b>Druh:</b></td><td>N+6</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Donau</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-dvojitý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>5</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_B.png" alt="Donau" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Donau</p>             </div>         </div>         </div>`)[0];
+                popup_9189151abb1711f27d992c99a5ebfe12.setContent(html_293b27b1dae594c0c046b893512a6f2b);
+            
+        
+
+        marker_914c7390ccc8f6512b6c10c163cf9b53.bindPopup(popup_9189151abb1711f27d992c99a5ebfe12)
+        ;
+
+        
+    
+    
+            marker_914c7390ccc8f6512b6c10c163cf9b53.bindTooltip(
+                `<div>
+                     Donau - 65
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_914c7390ccc8f6512b6c10c163cf9b53.setIcon(icon_2f31b7862af80be90b0473950362ad01);
+            
+    
+            var marker_c167693fae077e76aaf1e7e180327de9 = L.marker(
+                [47.90602586491197, 17.7943853392013],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_fed9a304a556a06219968d668ade1b40 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_08fe372d016eb7c66a264edf6142e63e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e6966dbc8c9e4aca200b720db191a77b = $(`<div id="html_e6966dbc8c9e4aca200b720db191a77b" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Donau</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V479</td></tr>                 <tr><td><b>Číslo:</b></td><td>66</td></tr>                 <tr><td><b>Druh:</b></td><td>N+0</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Donau</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-dvojitý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>5</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_B.png" alt="Donau" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Donau</p>             </div>         </div>         </div>`)[0];
+                popup_08fe372d016eb7c66a264edf6142e63e.setContent(html_e6966dbc8c9e4aca200b720db191a77b);
+            
+        
+
+        marker_c167693fae077e76aaf1e7e180327de9.bindPopup(popup_08fe372d016eb7c66a264edf6142e63e)
+        ;
+
+        
+    
+    
+            marker_c167693fae077e76aaf1e7e180327de9.bindTooltip(
+                `<div>
+                     Donau - 66
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c167693fae077e76aaf1e7e180327de9.setIcon(icon_fed9a304a556a06219968d668ade1b40);
+            
+    
+            var marker_20ac84b14c4231fb55779eaa3825da7b = L.marker(
+                [47.90619366115538, 17.798524094233148],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_c906b9d25b43a90b38f9a822873d1f71 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7965f826fc5a842659f1bfbf89cad5f9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_380fa7be812b06118d9e12544e99f7c9 = $(`<div id="html_380fa7be812b06118d9e12544e99f7c9" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Donau</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V479</td></tr>                 <tr><td><b>Číslo:</b></td><td>67</td></tr>                 <tr><td><b>Druh:</b></td><td>N+12</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Donau</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-dvojitý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>5</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_B.png" alt="Donau" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Donau</p>             </div>         </div>         </div>`)[0];
+                popup_7965f826fc5a842659f1bfbf89cad5f9.setContent(html_380fa7be812b06118d9e12544e99f7c9);
+            
+        
+
+        marker_20ac84b14c4231fb55779eaa3825da7b.bindPopup(popup_7965f826fc5a842659f1bfbf89cad5f9)
+        ;
+
+        
+    
+    
+            marker_20ac84b14c4231fb55779eaa3825da7b.bindTooltip(
+                `<div>
+                     Donau - 67
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_20ac84b14c4231fb55779eaa3825da7b.setIcon(icon_c906b9d25b43a90b38f9a822873d1f71);
+            
+    
+            var marker_72fb124c8b1894ee0998d91eed843e55 = L.marker(
+                [47.90638825001208, 17.80332661957249],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_b15231fd496320e96022ffb97750963a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_1b9c334e49bfc4645c6c0fc2d87ea073 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1b885f347e69c73c2c5cc349467796ab = $(`<div id="html_1b885f347e69c73c2c5cc349467796ab" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Donau</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V479</td></tr>                 <tr><td><b>Číslo:</b></td><td>68</td></tr>                 <tr><td><b>Druh:</b></td><td>RV(III+3)</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Donau</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-dvojitý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>5</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_B.png" alt="Donau" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Donau</p>             </div>         </div>         </div>`)[0];
+                popup_1b9c334e49bfc4645c6c0fc2d87ea073.setContent(html_1b885f347e69c73c2c5cc349467796ab);
+            
+        
+
+        marker_72fb124c8b1894ee0998d91eed843e55.bindPopup(popup_1b9c334e49bfc4645c6c0fc2d87ea073)
+        ;
+
+        
+    
+    
+            marker_72fb124c8b1894ee0998d91eed843e55.bindTooltip(
+                `<div>
+                     Donau - 68
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_72fb124c8b1894ee0998d91eed843e55.setIcon(icon_b15231fd496320e96022ffb97750963a);
+            
+    
+            var marker_db9598ea7141f32f84a93e6495c83549 = L.marker(
+                [47.909504735618206, 17.80472274483405],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_d00158c7f65766b92896c48e4a8e379e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_56d1cd6f3dd00a30824bbd0749095cd2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b4fff559a27a82bad9a9f1ec68adc201 = $(`<div id="html_b4fff559a27a82bad9a9f1ec68adc201" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Donau</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V479</td></tr>                 <tr><td><b>Číslo:</b></td><td>69</td></tr>                 <tr><td><b>Druh:</b></td><td>N+12</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Donau</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-dvojitý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>5</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_B.png" alt="Donau" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Donau</p>             </div>         </div>         </div>`)[0];
+                popup_56d1cd6f3dd00a30824bbd0749095cd2.setContent(html_b4fff559a27a82bad9a9f1ec68adc201);
+            
+        
+
+        marker_db9598ea7141f32f84a93e6495c83549.bindPopup(popup_56d1cd6f3dd00a30824bbd0749095cd2)
+        ;
+
+        
+    
+    
+            marker_db9598ea7141f32f84a93e6495c83549.bindTooltip(
+                `<div>
+                     Donau - 69
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_db9598ea7141f32f84a93e6495c83549.setIcon(icon_d00158c7f65766b92896c48e4a8e379e);
+            
+    
+            var marker_4ca021d05d2325e7a7255452aa8b8fca = L.marker(
+                [47.91285223025966, 17.806222664936683],
+                {
+}
+            ).addTo(map_07e24b6503bde43925c7171f7f0e8667);
+        
+    
+            var icon_6bb156804eab277ad363bc229de708e3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "bolt",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d39fb8f0ef73a05754d86bd85e432d56 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_804ce16e77291a98dc49984b5aa26d8b = $(`<div id="html_804ce16e77291a98dc49984b5aa26d8b" style="width: 100.0%; height: 100.0%;">         <div style="font-family: Arial, sans-serif; min-width: 220px;">             <h4 style="margin-bottom:8px; border-bottom: 1px solid #fff;">Donau</h4>             <table style="width:100%; font-size: 12px;">                 <tr><td><b>Vedenie:</b></td><td>V479</td></tr>                 <tr><td><b>Číslo:</b></td><td>70</td></tr>                 <tr><td><b>Druh:</b></td><td>RV(I+6)</td></tr>                 <tr><td><b>Typ stožiara:</b></td><td>Donau</td></tr>                 <tr><td><b>Typ 2:</b></td><td>Stožiar-dvojitý</td></tr>                                 <tr><td><b>IoT 1:</b></td><td>8</td></tr>                 <tr><td><b>IoT 2:</b></td><td>0</td></tr>             </table>             <div style="text-align: center; margin-top: 10px; padding: 5px; background: #ffffff;">                 <img src="https://raw.githubusercontent.com/Medvedku/Assets/refs/heads/main/imgs/towers/type_B.png" alt="Donau" style="width:180px; height:auto;">                 <p style="font-size: 9px; color: #888; margin-top: 5px;">Schéma Donau</p>             </div>         </div>         </div>`)[0];
+                popup_d39fb8f0ef73a05754d86bd85e432d56.setContent(html_804ce16e77291a98dc49984b5aa26d8b);
+            
+        
+
+        marker_4ca021d05d2325e7a7255452aa8b8fca.bindPopup(popup_d39fb8f0ef73a05754d86bd85e432d56)
+        ;
+
+        
+    
+    
+            marker_4ca021d05d2325e7a7255452aa8b8fca.bindTooltip(
+                `<div>
+                     Donau - 70
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4ca021d05d2325e7a7255452aa8b8fca.setIcon(icon_6bb156804eab277ad363bc229de708e3);
+            
+</script>
+</html>

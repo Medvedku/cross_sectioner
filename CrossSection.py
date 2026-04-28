@@ -5,7 +5,7 @@ from shapely import affinity
 
 
 class CrossSection:
-    def __init__(self, svg_path, num_samples=1000):
+    def __init__(self, svg_path, num_samples=256):
         self.svg_path = svg_path
         self.num_samples = num_samples
 
@@ -22,50 +22,123 @@ class CrossSection:
         self.yBc = abs(miny)
         self.yTc = maxy
 
+    # def _build_polygon(self):
+    #     all_loops = []
+    #     for element in self.svg_data.elements():
+    #         if isinstance(element, svgelements.Path):
+    #             # We split into subpaths (loops)
+    #             try:
+    #                 subs = list(element.as_subpaths())
+    #             except AttributeError:
+    #                 subs = [element]
+
+    #             for sub in subs:
+    #                 # Wrapping the subpath in a new Path object fixes the 'AttributeError'
+    #                 # This ensures we can use the .point(t) method
+    #                 temp_path = svgelements.Path(sub)
+
+    #                 if temp_path.length() == 0:
+    #                     continue
+
+    #                 points = []
+    #                 for t in np.linspace(0, 1, self.num_samples):
+    #                     p = temp_path.point(t)
+    #                     points.append((p.x, p.y))
+
+    #                 if len(points) > 3:
+    #                     all_loops.append(Polygon(points))
+
+    #     if not all_loops:
+    #         raise ValueError(f"No valid geometry in {self.svg_path}")
+
+    #     # Sort: Largest = Shell
+    #     all_loops.sort(key=lambda p: p.area, reverse=True)
+    #     shell = all_loops[0].exterior
+    #     holes = [p.exterior for p in all_loops[1:]]
+    #     poly = Polygon(shell=shell, holes=holes)
+
+    #     # Scale and Flip (Y-Up)
+    #     raw_w = poly.bounds[2] - poly.bounds[0]
+    #     scale = self.header_width / raw_w
+    #     poly = affinity.scale(poly, xfact=scale, yfact=-scale, origin=(0, 0))
+
+    #     # Center at (0,0)
+    #     cx, cy = poly.centroid.x, poly.centroid.y
+    #     return affinity.translate(poly, xoff=-cx, yoff=-cy)
+
+
     def _build_polygon(self):
         all_loops = []
+        FLATTEN_STEPS = 32
+
         for element in self.svg_data.elements():
-            if isinstance(element, svgelements.Path):
-                # We split into subpaths (loops)
-                try:
-                    subs = list(element.as_subpaths())
-                except AttributeError:
-                    subs = [element]
+            if not isinstance(element, svgelements.Path):
+                continue
 
-                for sub in subs:
-                    # Wrapping the subpath in a new Path object fixes the 'AttributeError'
-                    # This ensures we can use the .point(t) method
-                    temp_path = svgelements.Path(sub)
+            for subpath in element.as_subpaths():
+                points = []
 
-                    if temp_path.length() == 0:
+                for segment in subpath:
+                    # Move doesn't draw, but it defines where the next segment starts
+                    if isinstance(segment, svgelements.Move):
+                        if segment.end is not None:
+                            points.append((segment.end.x, segment.end.y))
                         continue
 
-                    points = []
-                    for t in np.linspace(0, 1, self.num_samples):
-                        p = temp_path.point(t)
-                        points.append((p.x, p.y))
+                    # Lines and Close commands are straight shots
+                    if isinstance(segment, (svgelements.Line, svgelements.Close)):
+                        if segment.end is not None:
+                            points.append((segment.end.x, segment.end.y))
 
-                    if len(points) > 3:
-                        all_loops.append(Polygon(points))
+                    # Curves (Cubic, Quadratic, and Arcs)
+                    else:
+                        # We sample the segment. Use [1:] to avoid duplicating
+                        # the end point of the previous segment.
+                        for t in np.linspace(0, 1, FLATTEN_STEPS)[1:]:
+                            try:
+                                p = segment.point(t)
+                                points.append((p.x, p.y))
+                            except (AttributeError, TypeError):
+                                continue
+
+                # Ensure we have a valid loop
+                if len(points) >= 3:
+                    # Remove consecutive duplicates which can crash Shapely's orientation logic
+                    clean_points = [points[0]]
+                    for i in range(1, len(points)):
+                        if points[i] != points[i-1]:
+                            clean_points.append(points[i])
+
+                    if len(clean_points) >= 3:
+                        poly = Polygon(clean_points)
+                        if poly.is_valid and poly.area > 1e-6:
+                            all_loops.append(poly)
 
         if not all_loops:
             raise ValueError(f"No valid geometry in {self.svg_path}")
 
-        # Sort: Largest = Shell
+        # --- Sorting and Geometric Assembly ---
+        # Sort by area descending: Largest is the "Shell"
         all_loops.sort(key=lambda p: p.area, reverse=True)
+
         shell = all_loops[0].exterior
-        holes = [p.exterior for p in all_loops[1:]]
+        holes = [p.exterior for p in all_loops[1:] if all_loops[0].contains(p)]
+
         poly = Polygon(shell=shell, holes=holes)
 
-        # Scale and Flip (Y-Up)
+        # --- Scale and Flip ---
         raw_w = poly.bounds[2] - poly.bounds[0]
+        if raw_w == 0:
+            return poly  # Safety check
+
         scale = self.header_width / raw_w
+        # Flip Y (SVG Y-down to Engineering Y-up)
         poly = affinity.scale(poly, xfact=scale, yfact=-scale, origin=(0, 0))
 
         # Center at (0,0)
         cx, cy = poly.centroid.x, poly.centroid.y
         return affinity.translate(poly, xoff=-cx, yoff=-cy)
-    
+
 
     def calculate_inertia(self):
         """Calculates Ix, Iy, and Ixy for the section."""
